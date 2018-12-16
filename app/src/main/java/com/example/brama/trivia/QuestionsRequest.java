@@ -2,7 +2,6 @@ package com.example.brama.trivia;
 
 import android.content.Context;
 import android.text.Html;
-import android.util.Log;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -16,17 +15,17 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+// This Request class downloads a given amount of questions from the API and returns them in an
+// ArrayList<Question>.
 public class QuestionsRequest implements Response.Listener<JSONObject>, Response.ErrorListener {
 
     private Context context;
     private Callback activity;
-    private String url = "https://opentdb.com/api.php?amount=";
-    // private String type;
+    private String url;
 
     @Override
     public void onErrorResponse(VolleyError error) {
         this.activity.gotQuestionsError(error.getMessage());
-        Log.d("blabla","Questions errorResponse");
     }
 
     @Override
@@ -44,6 +43,7 @@ public class QuestionsRequest implements Response.Listener<JSONObject>, Response
                             Html.FROM_HTML_MODE_LEGACY).toString());
                 }
 
+                // Make the strings readable
                 String questionText = Html.fromHtml(item.getString("question"),
                         Html.FROM_HTML_MODE_LEGACY).toString();
                 String correct = Html.fromHtml(item.getString("correct_answer"),
@@ -68,7 +68,7 @@ public class QuestionsRequest implements Response.Listener<JSONObject>, Response
 
     public QuestionsRequest(Context context, int amount, String type) {
         this.context = context;
-        this.url += String.valueOf(amount) + "&type=" + type;
+        this.url = "https://opentdb.com/api.php?amount=" + String.valueOf(amount) + "&type=" + type;
     }
 
     void getQuestions(Callback activity) {

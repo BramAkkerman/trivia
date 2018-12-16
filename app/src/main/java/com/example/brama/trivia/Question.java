@@ -5,6 +5,8 @@ import android.os.Parcelable;
 
 import java.util.ArrayList;
 
+// This class is used to store the API retrieved questions. It implements Parcelable so it can
+// be put into an intent.
 public class Question implements Parcelable {
     private String category;
     private String type;

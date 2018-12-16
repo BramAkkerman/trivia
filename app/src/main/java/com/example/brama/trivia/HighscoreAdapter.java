@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+// This adapter fills the Highscore items in the Listview with highscores from the API
 public class HighscoreAdapter extends ArrayAdapter<Highscore> {
 
     private Context context;
@@ -23,8 +24,8 @@ public class HighscoreAdapter extends ArrayAdapter<Highscore> {
         View result = convertView;
         Highscore highscore = getItem(position);
 
-        if (result== null) {
-            result= LayoutInflater.from(context).inflate(R.layout.highscore,parent,false);
+        if (result == null) {
+            result = LayoutInflater.from(context).inflate(R.layout.highscore,parent,false);
         }
 
         TextView rank = result.findViewById(R.id.rank);
